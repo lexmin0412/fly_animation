@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+    #game-box {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      box-sizing: border-box;
+      background: url('./images/背景.png') no-repeat center / 100% 100%;
+    }
+    #car-box {
+      position: relative;
+      margin: 0 auto;
+    }
+    #car-box img {
+      width: 100%;
+      height: 100%;
+    }
+    .false-car {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+    #go-btn {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .single-line {
+      display: flex;
+      align-items: center;
+      /* justify-content: center; */
+      
+    }
+    .single-line-inner {
+      display: flex;
+      align-items: center;
+
+    }
+    .phone-box {
+      display: flex;
+      align-items: center;
+      /* justify-content: center; */
+    }
+    .phone-number-item {
+      width: 100px;
+      height: 180px;
+      /* margin: 0 20px; */
+      color: #fff;
+      font-size: 100px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 180px;
+      /* background: url("./images/一个.png") no-repeat center / 100% 100%;     */
+    }
+    #marque-box {
+      width: 100%;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      /* background-color: #00c1de; */
+    }
+    #outer-box {
+      /* width: 100px; */
+      /* opacity: 0; */
+      position: relative;
+      height: 180px;
+      overflow: hidden;
+      background-color: #45aafa;
+      /* background: url("./images/一个.png") no-repeat center / 100% 100%;    */
+
+
+      /* width: 100%;
+      height: 100px;
+      background-color: #ffe400;
+      overflow: hidden; */
+    }
+
+    /* #box {
+      width: 200px;
+      overflow: hidden;
+      background-color: #00c1de;
+    } */
+    #place-holder-bg {
+      display: flex;
+      align-items: center;
+      /* justify-content: center; */
+    }
+    .place-holder-item {
+      width: 100px;
+      height: 180px;
+      background: url("./images/一个.png") no-repeat center / 100% 100%;
+    }
+    .stop-btn {
+      position: absolute;
+      bottom: 0;
+      left: 60%;
+      width: 100px;
+      height: 60px;
+      font-size: 30px;
+    }
+    .fly-start-btn {
+      position: absolute;
+      bottom: 0;
+      left: 70%;
+      width: 100px;
+      height: 60px;
+      font-size: 30px;
+    }
+    .fly-ele {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+    <div id="game-box">
+      <div id="car-box">
+        <img class="true-car" src="./images/红车@2x.png"></img>
+        <img class="false-car" src="./images/光@2x.png" />
+      </div>
+      <img id="go-btn" src="./images/椭圆 1.png" />
+      <button class="stop-btn">停止</button>
+      <button class="fly-start-btn" onclick="fly()">飞入</button>
+
+      <div id="outer-box" style="display: block;">
+
+        <div id="place-holder-bg">
+          <div class="place-holder-item"></div>
+          <div class="place-holder-item"></div>
+          <div class="place-holder-item"></div>
+          <div class="place-holder-item"></div>
+          <div class="place-holder-item"></div>
+          <div class="place-holder-item"></div>
+          <div class="place-holder-item"></div>
+          <div class="place-holder-item"></div>
+          <div class="place-holder-item"></div>
+          <div class="place-holder-item"></div>
+          <div class="place-holder-item"></div>
+        </div>
+        
+        <div id="marque-box">
+
+            <ul class="single-line">
+              <li class="phone-box">
+                <div class="phone-number-item">
+                  *
+                </div>
+                <div class="phone-number-item">
+                  *
+                </div>
+                <div class="phone-number-item">
+                  *
+                </div>
+                <div class="phone-number-item">
+                  *
+                </div>
+                <div class="phone-number-item">
+                  *
+                </div>
+                <div class="phone-number-item">
+                  *
+                </div>
+                <div class="phone-number-item">
+                  *
+                </div>
+                <div class="phone-number-item">
+                  *
+                </div>
+                <div class="phone-number-item">
+                  *
+                </div>
+                <div class="phone-number-item">
+                  *
+                </div>
+                <div class="phone-number-item">
+                  *
+                </div>
+              </li>
+            </ul>
+        </div>
+      </div>
+    </div>
+    <script src="./jquery.min.js"></script>
+    <!-- <script src="./jquery.marquee.js"></script> -->
+    <!-- <script src="./proto.marquee.js"></script> -->
+    <script>
+      
+      let clientHeight = document.documentElement.clientHeight
+      let clientWidth = document.documentElement.clientWidth
+      $(function(){
+
+
+        // $('.false-car').animate({
+        //   opacity: 0
+        // },2)
+
+        // setTimeout(() => {
+        //   $('#outer-box')[0].style.display = 'block'
+        //   $('#outer-box').animate({
+        //     opacity: 1,
+        //   },500)
+        // }, 2000);
+        
+        // function shwoPhoneBox() {
+        // }
+
+
+        var interval = null;   // 号码滚动定时器
+
+        // 无缝滚动
+        function marquee ( ele, interval, easingFunc ) {
+
+          var box = document.querySelector(ele)
+          var listBox = document.querySelector(''+ ele +' ul')
+
+          var itemList = document.querySelectorAll(''+ ele +' ul li')
+
+          var listLength = itemList.length
+
+          // 获取盒子总高度
+          var itemHeight = itemList[0].clientHeight
+          var moveHeight = itemHeight*listLength
+
+          // 克隆第一个item,加到最后
+          // var firstItemClone = itemList[0].cloneNode(true)
+          // listBox.appendChild(firstItemClone)
+
+          // 进入页面开始动画
+          document.querySelector(ele).parentNode.style.position = 'relative'
+          document.querySelector(ele).style.position = 'absolute'
+
+          var top = 0;
+
+          // 设置定时器 循环滚动
+          interval = setInterval(function(){
+            console.log(222222)
+            // 如果top值到达临界点，重置为0
+            if ( top <= -moveHeight ) {
+              top = 0
+            } 
+            top-= 100
+
+            box.style.top = top + 'px'
+            
+          },interval)
+
+          console.log(interval)
+
+        }
+        
+        $('#game-box').css({
+          height: clientHeight + 'px',
+          paddingTop: clientHeight*123/764 + 'px'
+        })
+
+        // 开始按钮点击
+        $('#go-btn').on('click',function(){
+
+
+          console.log(111111)
+                       
+          $('#marque-box').html('')
+              for ( var i=0; i<phoneNumberList.length; i++ ) {
+                const item = phoneNumberList[i]
+
+                if ( i> 0 ) {
+
+                  // 组合单条手机号码
+                  const html = `<ul class="single-line">
+                    <li class="phone-box">
+                      <div class="phone-number-item">
+                        ${item.phone[0]}
+                      </div>
+                      <div class="phone-number-item">
+                        ${item.phone[1]}
+                      </div>
+                      <div class="phone-number-item">
+                        ${item.phone[2]}
+                      </div>
+                      <div class="phone-number-item">
+                        ${item.phone[3]}
+                      </div>
+                      <div class="phone-number-item">
+                        ${item.phone[4]}
+                      </div>
+                      <div class="phone-number-item">
+                        ${item.phone[5]}
+                      </div>
+                      <div class="phone-number-item">
+                        ${item.phone[6]}
+                      </div>
+                      <div class="phone-number-item">
+                        ${item.phone[7]}
+                      </div>
+                      <div class="phone-number-item">
+                        ${item.phone[8]}
+                      </div>
+                      <div class="phone-number-item">
+                        ${item.phone[9]}
+                      </div>
+                      <div class="phone-number-item">
+                        ${item.phone[10]}
+                      </div>
+                    </li>
+                  </ul>`
+  
+                  if ( i === 0 ) {
+  
+                    console.log(html)
+                  }
+                  $('#marque-box').append(html)
+                }
+
+              }
+              marquee( '#marque-box', 1 )  
+        })
+        $('#car-box').css({
+          width: clientWidth*916/1297 + 'px',
+        })
+
+        // 停止按钮点击
+        $('.stop-btn').on('click', function(){
+          console.log(interval)
+          clearInterval(1)
+          $('#marque-box')[0].style.top = 0
+          $('#marque-box').html(`<ul class="single-line">
+                    <li class="phone-box">
+                      <div class="phone-number-item">
+                        ${1}
+                      </div>
+                      <div class="phone-number-item">
+                        ${8}
+                      </div>
+                      <div class="phone-number-item">
+                        ${6}
+                      </div>
+                      <div class="phone-number-item">
+                        ${1}
+                      </div>
+                      <div class="phone-number-item">
+                        ${7}
+                      </div>
+                      <div class="phone-number-item">
+                        ${0}
+                      </div>
+                      <div class="phone-number-item">
+                        ${9}
+                      </div>
+                      <div class="phone-number-item">
+                        ${8}
+                      </div>
+                      <div class="phone-number-item">
+                        ${3}
+                      </div>
+                      <div class="phone-number-item">
+                        ${3}
+                      </div>
+                      <div class="phone-number-item">
+                        ${7}
+                      </div>
+                    </li>
+                  </ul>`)
+        })
+
+        // 获取手机号码数据
+        queryPhoneNumList()
+        function queryPhoneNumList(){
+          $.ajax({
+            method: 'post',
+            url: 'https://wldoperation.58wld.com/go.php/Index/getData',
+            data: {},
+            success: function(res){
+              console.log('获取手机号码成功')
+
+              phoneNumberList = res.data
+ 
+            }
+          })
+        }
+      })
+
+
+      function createAnAnimation () {
+
+        var createRandom = `fly-ele-${Math.random()}`
+
+        $('body').append(`<div class="fly-ele ${createRandom}">小方块鸭</div>`)
+        console.log($(createRandom))
+        console.log($(createRandom).css)
+        $(`.${createRandom}`).css({
+          top: Math.random()*clientHeight+ 'px',
+          left: Math.random()*clientWidth + 'px'
+        })
+        console.log($(`.${createRandom}`).css('top'))
+        $(`.${createRandom}`).animate({
+          top: '50%',
+          left: '50%',
+        },2000)
+        // setTimeout(() => {
+        //   $(createRandom).hide()
+        // }, 2000);
+      }
+
+      // 飞入
+      function fly () {
+
+        createAnAnimation()
+        // createAnAnimation()
+        // createAnAnimation()
+        // createAnAnimation()
+        // createAnAnimation()
+        // createAnAnimation()
+        
+        
+        // setInterval(() => {
+        //   $('.fly-ele').css({
+        //     left: i + 'px',
+        //     top: i + 'px'
+        //   })
+        //   i++
+        // }, 10);
+      } 
+      
+    </script>
+    <!-- <div id="fly-ele"></div> -->
+</body>
+</html>
