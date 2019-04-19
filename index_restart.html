@@ -6,6 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    body {
+      background-color: #010148;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+    }
     ul {
       margin: 0;
       padding: 0;
@@ -15,11 +25,14 @@
       width: 100vw;
       height: 100vh;
       position: relative;
+      padding-top: 150px;
       box-sizing: border-box;
-      background: url('./images/背景.png') no-repeat center / 100% 100%;
+      background: url('./images/bg@2x.png') no-repeat center / 100% 100%;
     }
     #car-box {
-      position: relative;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -70%);
       margin: 0 auto;
     }
     #car-box img {
@@ -34,15 +47,19 @@
       left: 0;
     }
     #go-btn {
+      /* margin: 50px auto; */
       position: absolute;
-      bottom: 0;
+      bottom: 40px;
       left: 50%;
+      /* position: absolute;
+      bottom: 0;
+      left: 50%;*/
       transform: translateX(-50%);
     }
     .single-line {
       display: flex;
       align-items: center;
-      /* justify-content: center; */
+      justify-content: center;
       
     }
     .single-line-inner {
@@ -56,55 +73,59 @@
       /* justify-content: center; */
     }
     .phone-number-item {
-      width: 100px;
-      height: 180px;
-      /* margin: 0 20px; */
+      width: 68px;
+      height: 96px;
+      margin: 0 10px;
       color: #fff;
-      font-size: 100px;
+      font-size: 68px;
       font-weight: 700;
       text-align: center;
-      line-height: 180px;
+      line-height: 96px;
+      opacity: 0.7;
       /* background: url("./images/一个.png") no-repeat center / 100% 100%;     */
     }
     #marque-box {
       width: 100%;
       overflow: hidden;
-      position: absolute;
+      /* position: absolute;
       top: 0;
-      left: 0;
+      left: 0; */
       width: 100%;
-      /* background-color: #00c1de; */
     }
     #outer-box {
-      /* width: 100px; */
-      /* opacity: 0; */
-      position: relative;
-      height: 180px;
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 100%;
+      height: 37%;
+      transform: translateX(-50%);
+      text-align: center;
+      /* top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); */
+      /* bottom: 0; */
+      /* height: 96px; */
       overflow: hidden;
-      background-color: #45aafa;
-      /* background: url("./images/一个.png") no-repeat center / 100% 100%;    */
-
-
-      /* width: 100%;
-      height: 100px;
-      background-color: #ffe400;
-      overflow: hidden; */
     }
-
-    /* #box {
-      width: 200px;
+    #outer-box .inner {
+      /* position: absolute; */
+      /* bottom: 400px; */
+      width: 100%;
+      height: 96px;
       overflow: hidden;
-      background-color: #00c1de;
-    } */
+    }
     #place-holder-bg {
+      position: absolute;
+      width: 100%;
       display: flex;
       align-items: center;
-      /* justify-content: center; */
+      justify-content: center;
     }
     .place-holder-item {
-      width: 100px;
-      height: 180px;
-      background: url("./images/一个.png") no-repeat center / 100% 100%;
+      width: 68px;
+      height: 96px;
+      margin: 0 10px;
+      background: url("./images/image_phone_bg@2x.png") no-repeat center / 100% 100%;
     }
     .stop-btn {
       position: absolute;
@@ -126,104 +147,208 @@
       position: absolute;
       top: 0;
       left: 0;
+      transform: translate(-50%, -50%);
       color: #fff;
+      opacity: .7;
+    }
+    .page-title {
+      text-align: center;
+      font-size: 129px;
+      color: #fff;
+    }
+    .index-img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 100%;
     }
   </style>
 </head>
 <body>
-    <div id="game-box">
+
+  
+    <img class="index-img" src="./images/home_start_page.jpg" 
+      onclick="jump()"
+    />
+    <div id="game-box" style="display: none">
       <div id="car-box">
-        <img class="true-car" src="./images/红车@2x.png"></img>
-        <img class="false-car" src="./images/光@2x.png" />
+        <img class="true-car" src="./images/image_car@2x.png"></img>
+        <img class="false-car" src="./images/image_car_mask@2x.png" />
       </div>
-      <img id="go-btn" src="./images/椭圆 1.png" />
-      <button class="stop-btn">停止</button>
-      <button class="fly-start-btn" onclick="fly()">飞入</button>
+      <div class="page-title">超级锦鲤</div>
+      
+      <!-- <button class="stop-btn">停止</button> -->
 
-      <div id="outer-box" style="display: block;">
+      <div id="outer-box" style="display: none;">
 
-        <div id="place-holder-bg">
-          <div class="place-holder-item"></div>
-          <div class="place-holder-item"></div>
-          <div class="place-holder-item"></div>
-          <div class="place-holder-item"></div>
-          <div class="place-holder-item"></div>
-          <div class="place-holder-item"></div>
-          <div class="place-holder-item"></div>
-          <div class="place-holder-item"></div>
-          <div class="place-holder-item"></div>
-          <div class="place-holder-item"></div>
-          <div class="place-holder-item"></div>
+        <div class="inner">
+          <div id="place-holder-bg">
+            <div class="place-holder-item"></div>
+            <div class="place-holder-item"></div>
+            <div class="place-holder-item"></div>
+            <div class="place-holder-item"></div>
+            <div class="place-holder-item"></div>
+            <div class="place-holder-item"></div>
+            <div class="place-holder-item"></div>
+            <div class="place-holder-item"></div>
+            <div class="place-holder-item"></div>
+            <div class="place-holder-item"></div>
+            <div class="place-holder-item"></div>
+          </div>
+          
+          <div id="marque-box">
+  
+              <ul class="single-line">
+                <li class="phone-box">
+                  <div class="phone-number-item">
+                    *
+                  </div>
+                  <div class="phone-number-item">
+                    *
+                  </div>
+                  <div class="phone-number-item">
+                    *
+                  </div>
+                  <div class="phone-number-item">
+                    *
+                  </div>
+                  <div class="phone-number-item">
+                    *
+                  </div>
+                  <div class="phone-number-item">
+                    *
+                  </div>
+                  <div class="phone-number-item">
+                    *
+                  </div>
+                  <div class="phone-number-item">
+                    *
+                  </div>
+                  <div class="phone-number-item">
+                    *
+                  </div>
+                  <div class="phone-number-item">
+                    *
+                  </div>
+                  <div class="phone-number-item">
+                    *
+                  </div>
+                </li>
+              </ul>
+          </div>
         </div>
-        
-        <div id="marque-box">
 
-            <ul class="single-line">
-              <li class="phone-box">
-                <div class="phone-number-item">
-                  *
-                </div>
-                <div class="phone-number-item">
-                  *
-                </div>
-                <div class="phone-number-item">
-                  *
-                </div>
-                <div class="phone-number-item">
-                  *
-                </div>
-                <div class="phone-number-item">
-                  *
-                </div>
-                <div class="phone-number-item">
-                  *
-                </div>
-                <div class="phone-number-item">
-                  *
-                </div>
-                <div class="phone-number-item">
-                  *
-                </div>
-                <div class="phone-number-item">
-                  *
-                </div>
-                <div class="phone-number-item">
-                  *
-                </div>
-                <div class="phone-number-item">
-                  *
-                </div>
-              </li>
-            </ul>
-        </div>
+
+        <img id="go-btn" src="./images/icon_btn_start@2x.png" />
       </div>
+      
     </div>
+
+    <button onclick="toggleAudio()">关闭声音</button>
+
+    
+    <audio class="audio" src="./audio/小旭音乐 - 初音速-抽奖2.mp3" preload="auto" style="display: none;" loop />
+    <audio class="audio2" src="./audio/群星 - 抽奖音乐.mp3" preload="auto" style="display: none;" loop />
+    <audio class="audio-clap" src="./audio/V.A. - 공연 전 열광적인 박수소리.mp3" preload="auto" style="display: none;" loop />
     <script src="./jquery.min.js"></script>
     <!-- <script src="./jquery.marquee.js"></script> -->
     <!-- <script src="./proto.marquee.js"></script> -->
     <script>
+
+      var audioOpen = false
+
+      // 切换背景音乐播放状态
+      function toggleAudio () {
+        console.log($('.audio'))
+        if ( audioOpen ) {
+          audioOpen = false
+          $('audio')[0].pause()
+        }
+        else {
+          audioOpen = true
+          $('audio')[0].play()
+        }
+      }
+
+      function getResult() {
+        $.ajax({
+          method: 'post',
+          url: 'https://wldoperation.58wld.com/go.php/Index/startGame',
+          data: {},
+          success: function(res){
+            console.log('res',res)
+            
+            if ( res.code === 0 ) {
+              let result = res.data.c_phone
+              // alert(`抽奖成功：${result}`)
+              winner = result
+            }
+            else if ( res.code === 1001 ) {
+              alert(res.msg)
+            }
+          },
+          error: function(err) {
+            alert(err.msg)
+          }
+        })
+      } 
+
+
+
+      function jump() {
+        $.ajax({
+          method: 'post',
+          url: 'https://wldoperation.58wld.com/go.php/Index/initActive',
+          data: {},
+          success: function(res){
+            if ( res.code === 0 ) {
+              // alert('开启成功')
+              // window.location.href = './index_restart.html'
+              $('#game-box').fadeIn()
+              $('.false-car').animate({
+                opacity: 0
+              },fadeIn)
+              queryPhoneNumList()
+              getResult()
+              toggleAudio()
+      
+              setTimeout(() => {
+                $('.fly-ele').remove()
+                $('#outer-box').fadeIn()
+                // toggleAudio()
+              }, fadeIn);
+            }
+          }
+        })
+      }
       
       let clientHeight = document.documentElement.clientHeight
       let clientWidth = document.documentElement.clientWidth
+      var intervalTimer = 0;   // 号码滚动定时器
+      var fadeIn = 5000    // 车渐入 毫秒
+      var flyDuration = 1000   // 号码飞行
+      var isGaming = false   // 是否正在随机号码
+      var winner = ''
       $(function(){
 
 
-        // $('.false-car').animate({
-        //   opacity: 0
-        // },2)
+        setStyle()
 
-        // setTimeout(() => {
-        //   $('#outer-box')[0].style.display = 'block'
-        //   $('#outer-box').animate({
-        //     opacity: 1,
-        //   },500)
-        // }, 2000);
+        function setStyle() {
+          $('#game-box').css({
+            height: clientHeight + 'px',
+            // paddingTop: clientHeight*123/764 + 'px'
+          })
+          $('#car-box').css({
+            width: clientWidth*916/1297 + 'px',
+            // top: clientHeight*245/1528 + 'px'
+            top: "50%"
+          })
+        }
+
         
-        // function shwoPhoneBox() {
-        // }
-
-
-        var interval = null;   // 号码滚动定时器
+        
 
         // 无缝滚动
         function marquee ( ele, interval, easingFunc ) {
@@ -250,7 +375,7 @@
           var top = 0;
 
           // 设置定时器 循环滚动
-          interval = setInterval(function(){
+          intervalTimer = setInterval(function(){
             console.log(222222)
             // 如果top值到达临界点，重置为0
             if ( top <= -moveHeight ) {
@@ -266,180 +391,339 @@
 
         }
         
-        $('#game-box').css({
-          height: clientHeight + 'px',
-          paddingTop: clientHeight*123/764 + 'px'
-        })
+        
+
 
         // 开始按钮点击
         $('#go-btn').on('click',function(){
 
-
-          console.log(111111)
-                       
-          $('#marque-box').html('')
-              for ( var i=0; i<phoneNumberList.length; i++ ) {
-                const item = phoneNumberList[i]
-
-                if ( i> 0 ) {
-
-                  // 组合单条手机号码
-                  const html = `<ul class="single-line">
-                    <li class="phone-box">
-                      <div class="phone-number-item">
-                        ${item.phone[0]}
-                      </div>
-                      <div class="phone-number-item">
-                        ${item.phone[1]}
-                      </div>
-                      <div class="phone-number-item">
-                        ${item.phone[2]}
-                      </div>
-                      <div class="phone-number-item">
-                        ${item.phone[3]}
-                      </div>
-                      <div class="phone-number-item">
-                        ${item.phone[4]}
-                      </div>
-                      <div class="phone-number-item">
-                        ${item.phone[5]}
-                      </div>
-                      <div class="phone-number-item">
-                        ${item.phone[6]}
-                      </div>
-                      <div class="phone-number-item">
-                        ${item.phone[7]}
-                      </div>
-                      <div class="phone-number-item">
-                        ${item.phone[8]}
-                      </div>
-                      <div class="phone-number-item">
-                        ${item.phone[9]}
-                      </div>
-                      <div class="phone-number-item">
-                        ${item.phone[10]}
-                      </div>
-                    </li>
-                  </ul>`
+          if ( !isGaming ) {
+            toggleAudio()
+            $('.audio2')[0].play()
+            isGaming = true
+            $('#go-btn').attr({
+              "src": "./images/icon_btn_stop@2x.png"
+            })
+            $('#marque-box').html('')
+            for ( var i=0; i<phoneNumberList.length; i++ ) {
+              const item = phoneNumberList[i]
   
-                  if ( i === 0 ) {
+              if ( i> 0 ) {
   
-                    console.log(html)
-                  }
-                  $('#marque-box').append(html)
+                // 组合单条手机号码
+                const html = `<ul class="single-line">
+                  <li class="phone-box">
+                    <div class="phone-number-item">
+                      ${item.phone[0]}
+                    </div>
+                    <div class="phone-number-item">
+                      ${item.phone[1]}
+                    </div>
+                    <div class="phone-number-item">
+                      ${item.phone[2]}
+                    </div>
+                    <div class="phone-number-item">
+                      ${item.phone[3]}
+                    </div>
+                    <div class="phone-number-item">
+                      ${item.phone[4]}
+                    </div>
+                    <div class="phone-number-item">
+                      ${item.phone[5]}
+                    </div>
+                    <div class="phone-number-item">
+                      ${item.phone[6]}
+                    </div>
+                    <div class="phone-number-item">
+                      ${item.phone[7]}
+                    </div>
+                    <div class="phone-number-item">
+                      ${item.phone[8]}
+                    </div>
+                    <div class="phone-number-item">
+                      ${item.phone[9]}
+                    </div>
+                    <div class="phone-number-item">
+                      ${item.phone[10]}
+                    </div>
+                  </li>
+                </ul>`
+    
+                if ( i === 0 ) {
+    
+                  console.log(html)
                 }
-
+                $('#marque-box').append(html)
               }
-              marquee( '#marque-box', 1 )  
-        })
-        $('#car-box').css({
-          width: clientWidth*916/1297 + 'px',
-        })
-
-        // 停止按钮点击
-        $('.stop-btn').on('click', function(){
-          console.log(interval)
-          clearInterval(1)
-          $('#marque-box')[0].style.top = 0
-          $('#marque-box').html(`<ul class="single-line">
-                    <li class="phone-box">
-                      <div class="phone-number-item">
-                        ${1}
-                      </div>
-                      <div class="phone-number-item">
-                        ${8}
-                      </div>
-                      <div class="phone-number-item">
-                        ${6}
-                      </div>
-                      <div class="phone-number-item">
-                        ${1}
-                      </div>
-                      <div class="phone-number-item">
-                        ${7}
-                      </div>
-                      <div class="phone-number-item">
-                        ${0}
-                      </div>
-                      <div class="phone-number-item">
-                        ${9}
-                      </div>
-                      <div class="phone-number-item">
-                        ${8}
-                      </div>
-                      <div class="phone-number-item">
-                        ${3}
-                      </div>
-                      <div class="phone-number-item">
-                        ${3}
-                      </div>
-                      <div class="phone-number-item">
-                        ${7}
-                      </div>
-                    </li>
-                  </ul>`)
-        })
-
-        // 获取手机号码数据
-        queryPhoneNumList()
-        function queryPhoneNumList(){
-          $.ajax({
-            method: 'post',
-            url: 'https://wldoperation.58wld.com/go.php/Index/getData',
-            data: {},
-            success: function(res){
-              console.log('获取手机号码成功')
-
-              phoneNumberList = res.data
- 
+  
             }
-          })
-        }
+            marquee( '#marque-box', 1 )  
+          }
+          else {
+            isGaming = false
+            $('.audio2')[0].pause()
+            $('.audio-clap')[0].play()
+            $('#go-btn').hide()
+            // $('.phone-number-item').css({
+            //   opacity: 1
+            // })
+            window.clearInterval(intervalTimer)
+
+            $('#marque-box')[0].style.top = 0
+            $('#marque-box').html(`<ul class="single-line">
+              <li class="phone-box">
+                <div class="phone-number-item">
+                  ${winner[0]}
+                </div>
+                <div class="phone-number-item">
+                  ${winner[1]}
+                </div>
+                <div class="phone-number-item">
+                  ${winner[2]}
+                </div>
+                <div class="phone-number-item">
+                  ${winner[3]}
+                </div>
+                <div class="phone-number-item">
+                  ${winner[4]}
+                </div>
+                <div class="phone-number-item">
+                  ${winner[5]}
+                </div>
+                <div class="phone-number-item">
+                  ${winner[6]}
+                </div>
+                <div class="phone-number-item">
+                  ${winner[7]}
+                </div>
+                <div class="phone-number-item">
+                  ${winner[8]}
+                </div>
+                <div class="phone-number-item">
+                  ${winner[9]}
+                </div>
+                <div class="phone-number-item">
+                  ${winner[10]}
+                </div>
+              </li>
+            </ul>`)
+            
+            // getResult()
+          }
+                       
+        })
+
       })
 
+      // 获取手机号码数据
+      // queryPhoneNumList()
+      function queryPhoneNumList(){
+        $.ajax({
+          method: 'post',
+          url: 'https://wldoperation.58wld.com/go.php/Index/getData',
+          data: {},
+          success: function(res){
+            console.log('获取手机号码成功')
 
-      function createAnAnimation () {
+            phoneNumberList = res.data
 
-        var createRandom = `fly-ele-${Math.random()}`
-
-        $('body').append(`<div class="fly-ele ${createRandom}">小方块鸭</div>`)
-        console.log($(createRandom))
-        console.log($(createRandom).css)
-        $(`.${createRandom}`).css({
-          top: Math.random()*clientHeight+ 'px',
-          left: Math.random()*clientWidth + 'px'
+            fly()
+          }
         })
-        console.log($(`.${createRandom}`).css('top'))
-        $(`.${createRandom}`).animate({
+      }
+
+      function createRandomNum() {
+
+
+        // 生成 <0 或 >1的数
+        
+        let number1 = Math.random()
+        let toUseNumber = Math.random()
+        // let number2 = Math.random()
+        // let number3 = Math.random()
+        // let number4 = Math.random()
+        // let number5 = Math.random()
+        // let number6 = Math.random()
+        // let number7 = Math.random()
+        // let number8 = Math.random()
+        // let number9 = Math.random()
+        // let number10 = Math.random()
+        // let number11 = Math.random()
+        if ( number1 < 0.5 ) {
+          return 1+toUseNumber
+        }
+        else {
+          return -(1+toUseNumber)
+        }
+        // console.log(0 < number1 < 0.2)
+        // console.log(0.8 < number1 < 1)
+        // console.log('number1', number1)
+        // if ( (number1 > 0 && number1 < 0.2) || (number1 > 0.8) && (number1 < 1) ) {
+        //   console.log('number1')
+        //   return number1
+        // }
+        // else if ( (number2 > 0 && number2 < 0.2) || (number2 > 0.8) && (number2 < 1) ) {
+        //   console.log('number2')
+        //   return number2
+        // }
+        // else if ( (number3 > 0 && number3 < 0.2) || (number3 > 0.8) && (number3 < 1) ) {
+        //   console.log('number3')
+        //   return number3
+        // }
+        // else if ( (number4 > 0 && number4 < 0.2) || (number4 > 0.8) && (number4 < 1) ) {
+        //   console.log('number5')
+        //   return number4
+        // }
+        // else if ( (number5 > 0 && number5 < 0.2) || (number5 > 0.8) && (number5 < 1) ) {
+        //   console.log('number5')
+        //   return number5
+        // }
+        // else if ( (number6 > 0 && number6 < 0.2) || (number6 > 0.8) && (number6 < 1) ) {
+        //   console.log('number6')
+        //   return number6
+        // }
+        // else if ( (number7 > 0 && number7 < 0.2) || (number7 > 0.8) && (number7 < 1)) {
+        //   console.log('number7')
+        //   return number7
+        // }
+        // else if ((number8 > 0 && number8 < 0.2) || (number8 > 0.8) && (number8 < 1) ) {
+        //   console.log('number8')
+        //   return number8
+        // }
+        // else if ( (number9 > 0 && number9 < 0.2) || (number9 > 0.8) && (number9 < 1) ) {
+        //   console.log('number9')
+        //   return number9
+        // }
+      }
+      
+      
+      // 手机号码飞入动画
+      function phoneFlyAnim(callback) {
+        var randomTop = Math.random()
+        var randomLeft = Math.random()
+        // console.log(randomTop, randomLeft)
+        $(`.fly-ele`).css({
+          top: createRandomNum()*clientHeight,
+          left: createRandomNum()*clientWidth,
+          opacity: 1
+        })
+        $(`.fly-ele`).animate({
           top: '50%',
           left: '50%',
-        },2000)
-        // setTimeout(() => {
-        //   $(createRandom).hide()
-        // }, 2000);
+          opacity: 0.2
+        // },(1+Math.random())*flyDuration,'linear',phoneFlyAnim)
+        },(1+Math.random())*flyDuration,'linear',phoneFlyAnim)
       }
+
+      // 创建单个元素动画
+      function createAnAnimation (phoneNum) {
+        var randomTop = createRandomNum()
+        var randomLeft = createRandomNum()
+        // console.log(randomTop, randomLeft)
+        var createRandom = `fly-ele-${Math.random()}`
+        // $('body').append(`<div class="fly-ele ${createRandom}" style="top: ${randomTop*clientHeight}px; left: ${randomLeft*clientWidth}px; font-size: ${Math.random()*60}px">${phoneNum}</div>`)
+        $('body').append(`<div class="fly-ele ${createRandom}" style="font-size: ${Math.random()*60}px">${phoneNum}</div>`)
+        phoneFlyAnim()
+      }
+
 
       // 飞入
       function fly () {
 
-        createAnAnimation()
-        // createAnAnimation()
-        // createAnAnimation()
-        // createAnAnimation()
-        // createAnAnimation()
-        // createAnAnimation()
+        var c = 0
+        for ( var i=0; i<20; i++ ) {
+          // var c = i
+          setTimeout(() => {
+            console.log(c,'set')
+            for ( var j=c*5; j<c*5+5; j++ ) {
+              console.log('jj',j)
+              console.log(phoneNumberList[j].phone)
+              createAnAnimation(phoneNumberList[j].phone)
+            }
+            c = c+1
+          }, flyDuration/i);
+        }
+
+
+        // setTimeout(() => {
+        //   for ( var i=0; i<3; i++ ) {
+        //     createAnAnimation(phoneNumberList[i].phone)
+        //   }
+        // }, flyDuration/5);
+
+        // setTimeout(() => {
+        //   for ( var i=0; i<3; i++ ) {
+        //     createAnAnimation(phoneNumberList[i].phone)
+        //   }
+        // }, flyDuration*4/10);
+
+        // setTimeout(() => {
+        //   for ( var i=0; i<3; i++ ) {
+        //     createAnAnimation(phoneNumberList[i].phone)
+        //   }
+        // }, flyDuration*5/10);
+
+        // setTimeout(() => {
+        //   for ( var i=0; i<3; i++ ) {
+        //     createAnAnimation(phoneNumberList[i].phone)
+        //   }
+        // }, flyDuration*6/10);
+
+        // setTimeout(() => {
+        //   for ( var i=0; i<3; i++ ) {
+        //     createAnAnimation(phoneNumberList[i].phone)
+        //   }
+        // }, flyDuration*7/10);
+
+        // setTimeout(() => {
+        //   for ( var i=0; i<3; i++ ) {
+        //     createAnAnimation(phoneNumberList[i].phone)
+        //   }
+        // }, flyDuration*8/10);
+
+        // setTimeout(() => {
+        //   for ( var i=0; i<3; i++ ) {
+        //     createAnAnimation(phoneNumberList[i].phone)
+        //   }
+        // }, flyDuration*9/10);
+
+        // setTimeout(() => {
+        //   for ( var i=0; i<3; i++ ) {
+        //     createAnAnimation(phoneNumberList[i].phone)
+        //   }
+        // }, flyDuration*10/10);
+
+        // setTimeout(() => {
+        //   for ( var i=0; i<3; i++ ) {
+        //     createAnAnimation(phoneNumberList[i].phone)
+        //   }
+        // }, flyDuration*11/10);
+
+        // setTimeout(() => {
+        //   for ( var i=0; i<3; i++ ) {
+        //     createAnAnimation(phoneNumberList[i].phone)
+        //   }
+        // }, flyDuration*13/10);
+
+        // setTimeout(() => {
+        //   for ( var i=0; i<3; i++ ) {
+        //     createAnAnimation(phoneNumberList[4].phone)
+        //   }
+        // }, flyDuration*14/10);
+
+        // setTimeout(() => {
+        //   for ( var i=0; i<3; i++ ) {
+        //     createAnAnimation(phoneNumberList[4].phone)
+        //   }
+        // }, flyDuration*15/10);
+
+        // setTimeout(() => {
+        //   for ( var i=0; i<3; i++ ) {
+        //     createAnAnimation(phoneNumberList[4].phone)
+        //   }
+        // }, flyDuration*16/10);
         
-        
-        // setInterval(() => {
-        //   $('.fly-ele').css({
-        //     left: i + 'px',
-        //     top: i + 'px'
-        //   })
-        //   i++
-        // }, 10);
       } 
-      
     </script>
-    <!-- <div id="fly-ele"></div> -->
 </body>
 </html>

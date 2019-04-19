@@ -23,13 +23,22 @@
   </style>
 </head>
 <body>
-  <img src="./images/筑梦燎原-8.png" 
-    onclick="jump()"
-  />
+  
 </body>
+<script src="./jquery.min.js"></script>
 <script>
   function jump(){
-    window.location.href = './index_restart.html'
+    $.ajax({
+      method: 'post',
+      url: 'https://wldoperation.58wld.com/go.php/Index/initActive',
+      data: {},
+      success: function(res){
+        if ( res.code === 0 ) {
+          alert('开启成功')
+          window.location.href = './index_restart.html'
+        }
+      }
+    })
   }
 </script>
 </html>
