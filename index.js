@@ -85,8 +85,8 @@ $(function() {
         src: "./images/icon_btn_stop@2x.png"
       });
       $("#marque-box").html("");
-      for (var i = 0; i < phoneNumberList.length; i++) {
-        var item = phoneNumberList[i];
+      for (var i = 0; i < drawNumberList.length; i++) {
+        var item = drawNumberList[i];
 
         if (i > 0) {
           // 组合单条手机号码
@@ -139,6 +139,9 @@ $(function() {
       isGaming = false;
       $(".audio2")[0].pause();
       $(".audio-clap")[0].play();
+      setTimeout(() => {
+        $(".audio-clap")[0].pause();
+      }, 4000);
       $("#go-btn").hide();
       window.clearInterval(intervalTimer);
       $("#marque-box")[0].style.top = 0;
@@ -196,9 +199,19 @@ function createRandomNum() {
 
 // 手机号码飞入动画
 function phoneFlyAnim(callback) {
+  // var top = createRandomNum() ;
+  // var left = createRandomNum();
+  // if ( top > 0 ) {
+  //   left = Math.random()
+  // }
+  // else if ( left > 0 ) {
+  //   top = Math.random()
+  // }
   $(`.fly-ele`).css({
     top: createRandomNum() * clientHeight,
     left: createRandomNum() * clientWidth,
+    // top: top,
+    // left: left,
     opacity: 1
   });
   $(`.fly-ele`).animate(
@@ -232,8 +245,8 @@ function fly() {
       console.log(c, "set");
       for (var j = c * 5; j < c * 5 + 5; j++) {
         console.log("jj", j);
-        console.log(phoneNumberList[j]);
-        createAnAnimation(phoneNumberList[j]);
+        console.log(flyNumberList[j]);
+        createAnAnimation(flyNumberList[j]);
       }
       c = c + 1;
     }, flyDuration / i);

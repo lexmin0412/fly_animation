@@ -4,6 +4,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Microsoft YaHei' !important;
 }
 ul {
   margin: 0;
@@ -106,13 +107,13 @@ body .index-img {
   line-height: 96px;
   opacity: 0.7;
 }
-#game-box #outer-box .inner #marque-box #go-btn-box {
+#game-box #outer-box #go-btn-box {
   position: absolute;
-  bottom: 40px;
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
 }
-#game-box #outer-box .inner #marque-box #go-btn-box #go-btn {
+#game-box #outer-box #go-btn-box #go-btn {
   display: block;
   width: 150px;
   height: 150px;
