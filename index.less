@@ -1,0 +1,140 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #010148;
+
+  
+  .index-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+}
+#game-box {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  padding-top: 150px;
+  box-sizing: border-box;
+  background: url("./images/bg@2x.png") no-repeat center / 100% 100%;
+
+  #car-box {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    margin: 0 auto;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    .false-car {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+  }
+  .page-title {
+    text-align: center;
+    font-size: 129px;
+    color: #fff;
+  }
+  #outer-box {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 100%;
+    height: 37%;
+    transform: translateX(-50%);
+    text-align: center;
+    overflow: hidden;
+
+    .inner {
+      width: 100%;
+      height: 96px;
+      overflow: hidden;
+
+      #place-holder-bg {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .place-holder-item {
+          width: 68px;
+          height: 96px;
+          margin: 0 10px;
+          background: url("./images/image_phone_bg@2x.png") no-repeat center / 100% 100%;
+        }
+      }
+      #marque-box {
+        width: 100%;
+        overflow: hidden;
+        width: 100%;
+
+        .single-line {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+  
+          .phone-box {
+            display: flex;
+            align-items: center;
+  
+            .phone-number-item {
+              width: 68px;
+              height: 96px;
+              margin: 0 10px;
+              color: #fff;
+              font-size: 50px;
+              font-weight: 700;
+              text-align: center;
+              line-height: 96px;
+              opacity: 0.7;
+            }
+          }
+        }
+        #go-btn-box {
+          position: absolute;
+          bottom: 40px;
+          left: 50%;
+          transform: translateX(-50%);
+
+          #go-btn {
+            display: block;
+            width: 150px;
+            height: 150px;
+          }
+        }
+      }
+    }
+  }
+}
+.fly-ele {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  opacity: 0.7;
+}

@@ -1,83 +1,241 @@
-window.onload = function(){
 
-  xL = 80
-        xH = xW = xR = xE = xMY = xMX = xWd = xHd = 0;
-        xF = new Array();
-        xY = new Array();
-        xX = new Array();
-        xS = new Array();
-        xA = new Array();
-        xB = new Array();
-        ini = new Array();
-  
-        // const div = document.createElement('div')
-        // div.style.position = 'absolute'
-        
-        document.write(
-          '<div id="sdiv" style="position:absolute;top:0px;left:0px"><div style="position:relative">'
-        );
-        for (i = 0; i < xL; i++) {
-          document.write(
-            '<div id="div" style="position:absolute;top:0;left:0;width:5px;height:5px;' +
-              'font-size:10px;color:#ffffff">.</div>'
-          );
-        }
-        document.write("</div></div>");
-        function Set() {
-          for (i = 0; i < xL; i++) {
-            transfer(i);
-            xF[i] = xW / 14;
-          }
-        }
-        function Assign() {
-          sdiv.style.top = document.body.scrollTop;
-          for (i = 0; i < xL; i++) {
-            xF[i] -= xS[i] * 25;
-            if (xF[i] < 4) xF[i] = 3;
-            div[i].style.top = xY[i];
-            div[i].style.left = xX[i];
-            div[i].style.fontSize = xF[i];
-          }
-        }
-        function fly() {
-          xMY = window.document.body.clientHeight / 2;
-          xMX = window.document.body.clientWidth / 2;
-          xWd = Math.round(Math.random() * 40 + 5);
-          xHd = Math.round(Math.random() * 30 + 5);
-          for (i = 0; i < xL; i++) {
-            xY[i] = xA[i] += (xMY - xA[i]) * xS[i];
-            xX[i] = xB[i] += (xMX - xB[i]) * xS[i];
-            if (
-              xX[i] > xMX - xWd &&
-              xX[i] < xMX + xWd &&
-              xY[i] > xMY - xHd &&
-              xY[i] < xMY + xHd
-            ) {
-              transfer(i);
-            }
-            if (xX[i] < 0 || xX[i] > xW || xY[i] < 0 || xY[i] > xH) {
-              xF[i] = xW / 14;
-            }
-          }
-          Assign();
-          setTimeout("fly()", 1);
-        }
-        function transfer(i) {
-          xH = window.document.body.offsetHeight;
-          xW = window.document.body.offsetWidth;
-          xA[i] = Math.round(Math.random() * xH);
-          xB[i] = Math.round(Math.random() * xW);
-          xS[i] = Math.random() * 0.05 + 0.05;
-          xR = Math.round(Math.random() * 3);
-          xE = Math.round(Math.random() * 50 + 50);
-          if (xR == 3) xB[i] = -xE;
-          if (xR == 2) xB[i] = xW + xE;
-          if (xR == 1) xA[i] = -xE;
-          if (xR == 0) xA[i] = xH;
-        }
-        console.log(window)
-        Set();
-        fly();
-        
+var audioOpen = false;
+// 切换背景音乐播放状态
+function toggleAudio() {
+  console.log($(".audio"));
+  if (audioOpen) {
+    audioOpen = false;
+    $("audio")[0].pause();
+  } else {
+    audioOpen = true;
+    $("audio")[0].play();
+  }
+}
+function getResult() {
+  winner = winner
+}
+function jump() {
+  $("#game-box").fadeIn();
+  $(".false-car").animate(
+    {
+      opacity: 0
+    },
+    fadeIn
+  );
+  getResult();
+  toggleAudio();
+  fly();
+
+  setTimeout(() => {
+    $(".fly-ele").remove();
+    $("#outer-box").fadeIn();
+  }, fadeIn);
 }
 
+var clientHeight = document.documentElement.clientHeight;
+var clientWidth = document.documentElement.clientWidth;
+var intervalTimer = 0; // 号码滚动定时器
+var isGaming = false; // 是否正在随机号码
+$(function() {
+  setStyle();
+  function setStyle() {
+    $("#game-box").css({
+      height: clientHeight + "px"
+    });
+    $("#car-box").css({
+      width: (clientWidth * 916) / 1297 + "px",
+      top: "50%"
+    });
+  }
+
+  // 无缝滚动
+  function marquee(ele, interval, easingFunc) {
+    var box = document.querySelector(ele);
+    var listBox = document.querySelector("" + ele + " ul");
+    var itemList = document.querySelectorAll("" + ele + " ul li");
+    var listLength = itemList.length;
+    // 获取盒子总高度
+    var itemHeight = itemList[0].clientHeight;
+    var moveHeight = itemHeight * listLength;
+    // 克隆第一个item,加到最后
+    // var firstItemClone = itemList[0].cloneNode(true)
+    // listBox.appendChild(firstItemClone)
+    // 进入页面开始动画
+    document.querySelector(ele).parentNode.style.position = "relative";
+    document.querySelector(ele).style.position = "absolute";
+    var top = 0;
+    // 设置定时器 循环滚动
+    intervalTimer = setInterval(function() {
+      // 如果top值到达临界点，重置为0
+      if (top <= -moveHeight) {
+        top = 0;
+      }
+      top -= 60;
+      box.style.top = top + "px";
+    }, interval);
+  }
+
+  // 开始按钮点击
+  $("#go-btn").on("click", function() {
+    if (!isGaming) {
+      toggleAudio();
+      $(".audio2")[0].play();
+      isGaming = true;
+      $("#go-btn").attr({
+        src: "./images/icon_btn_stop@2x.png"
+      });
+      $("#marque-box").html("");
+      for (var i = 0; i < phoneNumberList.length; i++) {
+        var item = phoneNumberList[i];
+
+        if (i > 0) {
+          // 组合单条手机号码
+          var html = `<ul class="single-line">
+            <li class="phone-box">
+              <div class="phone-number-item">
+                ${item[0]}
+              </div>
+              <div class="phone-number-item">
+                ${item[1]}
+              </div>
+              <div class="phone-number-item">
+                ${item[2]}
+              </div>
+              <div class="phone-number-item">
+                ${item[3]}
+              </div>
+              <div class="phone-number-item">
+                ${item[4]}
+              </div>
+              <div class="phone-number-item">
+                ${item[5]}
+              </div>
+              <div class="phone-number-item">
+                ${item[6]}
+              </div>
+              <div class="phone-number-item">
+                ${item[7]}
+              </div>
+              <div class="phone-number-item">
+                ${item[8]}
+              </div>
+              <div class="phone-number-item">
+                ${item[9]}
+              </div>
+              <div class="phone-number-item">
+                ${item[10]}
+              </div>
+            </li>
+          </ul>`;
+
+          if (i === 0) {
+            console.log(html);
+          }
+          $("#marque-box").append(html);
+        }
+      }
+      marquee("#marque-box", 1);
+    } else {
+      isGaming = false;
+      $(".audio2")[0].pause();
+      $(".audio-clap")[0].play();
+      $("#go-btn").hide();
+      window.clearInterval(intervalTimer);
+      $("#marque-box")[0].style.top = 0;
+      $("#marque-box").html(`<ul class="single-line">
+        <li class="phone-box">
+          <div class="phone-number-item">
+            ${winner[0]}
+          </div>
+          <div class="phone-number-item">
+            ${winner[1]}
+          </div>
+          <div class="phone-number-item">
+            ${winner[2]}
+          </div>
+          <div class="phone-number-item">
+            ${winner[3]}
+          </div>
+          <div class="phone-number-item">
+            ${winner[4]}
+          </div>
+          <div class="phone-number-item">
+            ${winner[5]}
+          </div>
+          <div class="phone-number-item">
+            ${winner[6]}
+          </div>
+          <div class="phone-number-item">
+            ${winner[7]}
+          </div>
+          <div class="phone-number-item">
+            ${winner[8]}
+          </div>
+          <div class="phone-number-item">
+            ${winner[9]}
+          </div>
+          <div class="phone-number-item">
+            ${winner[10]}
+          </div>
+        </li>
+      </ul>`);
+    }
+  });
+});
+function createRandomNum() {
+  // 生成 <0 或 >1的数
+
+  var number1 = Math.random();
+  var toUseNumber = Math.random();
+  if (number1 < 0.5) {
+    return 1 + toUseNumber;
+  } else {
+    return -(1 + toUseNumber);
+  }
+}
+
+// 手机号码飞入动画
+function phoneFlyAnim(callback) {
+  $(`.fly-ele`).css({
+    top: createRandomNum() * clientHeight,
+    left: createRandomNum() * clientWidth,
+    opacity: 1
+  });
+  $(`.fly-ele`).animate(
+    {
+      top: "50%",
+      left: "50%",
+      opacity: 0.2
+    },
+    (1 + Math.random()) * flyDuration,
+    "linear",
+    phoneFlyAnim
+  );
+}
+// 创建单个元素动画
+function createAnAnimation(phoneNum) {
+  var randomTop = createRandomNum();
+  var randomLeft = createRandomNum();
+  var createRandom = `fly-ele-${Math.random()}`;
+  $("body").append(
+    `<div class="fly-ele ${createRandom}" style="font-size: ${Math.random() *
+      60}px">${phoneNum}</div>`
+  );
+  phoneFlyAnim();
+}
+// 飞入
+function fly() {
+  var c = 0;
+  for (var i = 0; i < 20; i++) {
+    // var c = i
+    setTimeout(() => {
+      console.log(c, "set");
+      for (var j = c * 5; j < c * 5 + 5; j++) {
+        console.log("jj", j);
+        console.log(phoneNumberList[j]);
+        createAnAnimation(phoneNumberList[j]);
+      }
+      c = c + 1;
+    }, flyDuration / i);
+  }
+}
