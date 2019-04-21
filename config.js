@@ -8,7 +8,7 @@ var fadeIn = 20000;
 var flyDuration = 1000; 
 
 // 定义中奖手机号码
-var winner = '138锦鲤会员4791'
+var winner = '180锦鲤会员6963'
 
 var flyNumberList = [
   "138****4971",
