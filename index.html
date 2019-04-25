@@ -85,5 +85,23 @@
     <script src="./jquery.min.js"></script>
     <script src="./config.js"></script>
     <script src="./index.js"></script>
+    <script>
+      $(function(){
+        $.ajax({
+          method: 'get',
+          url: 'http://localhost:3000/playlist/detail?id=24381616',
+          // data: {
+          //   phone: '18507381799',
+          //   password: '1234567890qaz'
+          // }
+          success: function(res){
+            console.log(res)
+          },
+          error: function(err){
+            console.log(err)
+          }
+        })
+      })
+    </script>
 </body>
 </html>
